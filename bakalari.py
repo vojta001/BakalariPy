@@ -6,7 +6,6 @@ import hashlib
 import base64
 import datetime
 import xmltodict
-import urllib2
 
 from xml.dom import minidom
 
