@@ -1,7 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import urllib2
+try:
+	from urllib.request import urlopen
+except ImportError:
+	from urllib2 import urlopen
 import hashlib
 import base64
 import datetime
@@ -23,7 +26,7 @@ class BakalariAPI:
 
     # Misc functions
     def http_call(self, params):
-        return(urllib2.urlopen(self.url + "?ifaceVer=1&hx=" + self.token + "&" + params, timeout=5).read())
+        return(urlopen(self.url + "?ifaceVer=1&hx=" + self.token + "&" + params, timeout=5).read())
 
     def parse_xml(self, xml):
         return(xmltodict.parse(xml))
@@ -34,7 +37,7 @@ class BakalariAPI:
 
     # Authentication
     def get_seeds(self):
-        data = urllib2.urlopen(self.url + "?gethx=" + self.username, timeout=5).read()
+        data = urlopen(self.url + "?gethx=" + self.username, timeout=5).read()
         xml = minidom.parseString(data.decode('utf-8'))
 
         try:
